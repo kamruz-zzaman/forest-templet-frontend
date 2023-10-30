@@ -1,18 +1,20 @@
 import AddAMark from "./AddAMark/AddAMark";
 import CheckboxItems from "./InputField/CheckboxItems";
 import TextInput from "./InputField/TextInput";
+import AdjacentTrees from "./SelectOption/AdjacentTrees";
 import CommuneVillage from "./SelectOption/CommuneVillage";
 import Country from "./SelectOption/Country";
 import DayMonthYears from "./SelectOption/DayMonthYears";
 import InAForestOf from "./SelectOption/InAForestOf";
-import ClaimPV from "./Upload/ClaimPV";
+import FilePreviewer from "./Upload/ClaimPV";
 
 const FormDetails = () => {
   // from title
-  const fromTitle = (idx, text) => (
+  const fromTitle = (idx, text, spanText) => (
     <>
       <h2 className="text-[#333] font-bold text-sm">
-        <span> {idx} </span> {text}{" "}
+        <span> {idx} </span> {text}
+        {spanText && <span className="font-normal">({spanText})</span>}
       </h2>
 
       <hr className="my-5 border border-[#eee]" />
@@ -160,14 +162,14 @@ const FormDetails = () => {
 
               {/* HELPFUL LANDMARKS or Add A Mark */}
               <div className="col-span-12">{<AddAMark />}</div>
+              <div className="col-span-6"> {<InAForestOf />}</div>
 
               {/* In A Forest Of  */}
-              {<InAForestOf />}
 
               {/* ON AN AREA OF ​​MINIMUM */}
               {
                 <TextInput
-                  style="col-span-6"
+                  style="col-span-6 mt-2"
                   id="minimumArea"
                   type="text"
                   label="ON AN AREA OF ​​MINIMUM"
@@ -175,11 +177,11 @@ const FormDetails = () => {
                   require={true}
                 />
               }
-
+              <div className="col-span-6"> {<AdjacentTrees />}</div>
               {/* WITH THE INSCRIPTION */}
               {
                 <TextInput
-                  style="col-span-6"
+                  style="col-span-6 mt-1"
                   id="minimumArea"
                   type="text"
                   label="WITH THE INSCRIPTION"
@@ -190,10 +192,11 @@ const FormDetails = () => {
 
               {/* Illegal activity you noticed */}
 
-              <div className="col-span-12">
+              <div className="col-span-12 my-2">
                 {fromTitle(
                   "3. ",
-                  ` Tell us who you are ${(<span>(select at least one)</span>)}`
+                  ` Tell us who you are`,
+                  "select at least one"
                 )}
               </div>
 
@@ -211,19 +214,19 @@ const FormDetails = () => {
 
             {/* upload functionality */}
             <div>
-              <ClaimPV />
+              <FilePreviewer />
             </div>
 
             {/* Accept */}
-            <div className="col-span-12">
-              <label htmlFor="acceptAllCn">
+            <div className="col-span-12 my-3">
+              <input type="checkbox" name="acceptAllCn" id="acceptAllCn" />
+              <label className="font-bold ml-2" htmlFor="acceptAllCn">
                 I have the possibility and availability to travel to the area
                 together with the investigative team
               </label>
-              <input type="checkbox" name="acceptAllCn" id="acceptAllCn" />
             </div>
 
-            <div className="col-span-12">
+            <div className="col-span-12 my-2">
               <p>
                 I want you to check the situation in the area and send me the
                 inspection report to the email address provided, as well as to
@@ -232,10 +235,14 @@ const FormDetails = () => {
             </div>
 
             <div className="col-span-12">
-              <button type="submit" className="bg-primary py-2 px-9 rounded-lg">
-                {" "}
-                Send{" "}
-              </button>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-primary text-white font-bold py-2 px-9 rounded-lg"
+                >
+                  Send
+                </button>
+              </div>
             </div>
           </form>
         </div>

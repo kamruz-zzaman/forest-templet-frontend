@@ -4,9 +4,9 @@ const CommuneVillage = () => {
   const data = (
     <>
       <div className="col-md-4">
-        <label for="ReportCityId" className="control-label">
+        <label for="ReportCityId" className="uppercase font-bold text-[#333]">
           Commune/village:
-          <span className="text-orange-400">*</span>
+          <span className="">*</span>
         </label>
         <div className="required">
           <select

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import CheckItem from "./CheckItem";
 
 const CheckboxItems = () => {
@@ -99,7 +100,15 @@ const CheckboxItems = () => {
       img: "https://cdn.salvezpadurea.ro/img/uploads/activities/577a40c3-51a8-41ef-bc78-4f545d724059.png",
     },
   ];
-
+  const [selectedData, setSelectedData] = useState([]);
+  const onChangeData = (id) => {
+    console.log(id);
+    if (selectedData.includes(id)) {
+      setSelectedData(selectedData?.filter((fill) => fill !== id));
+    } else {
+      setSelectedData([...selectedData, id]);
+    }
+  };
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -107,8 +116,11 @@ const CheckboxItems = () => {
         {data &&
           data.map((d, idx) => (
             <div key={idx}>
-              {" "}
-              <CheckItem data={d} />
+              <CheckItem
+                data={d}
+                onChangeData={onChangeData}
+                selectedData={selectedData}
+              />
             </div>
           ))}
       </div>
