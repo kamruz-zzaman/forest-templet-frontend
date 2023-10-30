@@ -19,7 +19,7 @@ const DayMonthYears = () => {
   ];
 
   return (
-    <div className="px-[10px] flex flex-col items-start justify-between gap-1 w-full">
+    <div className="px-[10px] flex flex-col items-start justify-between w-full gap-x-1">
       <label
         className="uppercase font-bold text-[#333] cursor-pointer"
         htmlFor="years"
@@ -29,10 +29,10 @@ const DayMonthYears = () => {
 
       <div className="flex">
         {/* year */}
-        <div className="sm:px-[3px] py-[7px]">
+        <div className="sm:px-[3px] ">
           <select
             id="years"
-            className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]"
+            className="border-2 border-primary py-1.5 px-3 outline-none focus:shadow-md rounded w-full"
           >
             <option value="year">Year</option>
             {yearsRange &&
@@ -45,8 +45,8 @@ const DayMonthYears = () => {
         </div>
 
         {/* month */}
-        <div className="sm:px-[3px] py-[7px]">
-          <select className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-2 py-[3px]">
+        <div className="sm:px-[3px]">
+          <select className="border-2 border-primary py-1.5 px-3 outline-none focus:shadow-md rounded w-full">
             {months &&
               months.map((m) => (
                 <option key={m} value={m}>
@@ -57,8 +57,8 @@ const DayMonthYears = () => {
         </div>
 
         {/* day */}
-        <div className="sm:px-[3px] py-[7px]">
-          <select className="text-darkBlue border-b border-midBlue focus:outline-none focus:border-b focus:border-midBlue pr-1 sm:pr-3 py-[3px]">
+        <div className="sm:px-[3px]">
+          <select className="border-2 border-primary py-1.5 px-3 outline-none focus:shadow-md rounded w-full">
             <option value="">Day</option>
             {daysRange &&
               daysRange.map((d) => (

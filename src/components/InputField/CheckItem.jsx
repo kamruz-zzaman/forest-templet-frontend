@@ -1,13 +1,12 @@
-const CheckItem = ({ data }) => {
-  const { id, htmlId, img, label } = data;
-
+const CheckItem = ({ data, onChangeData, selectedData }) => {
+  const { _id, htmlId, img, label } = data;
   let markup;
 
   if (htmlId == "abandonedWood") {
     markup = (
       <div className="flex items-start justify-start">
         <div>
-          <label htmlFor={id}>
+          <label htmlFor={_id}>
             <div className="flex items-start justify-start">
               <figure className="w-[6.5rem] h-[6.5rem]">
                 <img className="w-full h-full" src={img} alt="" />
@@ -15,7 +14,7 @@ const CheckItem = ({ data }) => {
               <span>{label}</span>
             </div>
           </label>
-          <input className="hidden" id={id} type="checkbox" />
+          <input className="hidden" id={_id} type="checkbox" />
         </div>
 
         <select
@@ -40,11 +39,20 @@ const CheckItem = ({ data }) => {
     markup = (
       <div className="flex items-start justify-start">
         <label htmlFor={htmlId}>
-          <div className="flex items-start justify-start">
+          <div
+            onClick={() => onChangeData(_id)}
+            className="flex items-center justify-start  cursor-pointer"
+          >
             <figure className="w-[6.5rem] h-[6.5rem]">
-              <img className="w-full h-full" src={img} alt="" />
+              <img
+                className={`w-full h-full ${
+                  selectedData?.includes(_id) ? "grayscale-0" : "grayscale"
+                }`}
+                src={img}
+                alt=""
+              />
             </figure>
-            <span>{label}</span>
+            <span className="ms-2">{label}</span>
           </div>
         </label>
         <input className="hidden" id={htmlId} type="checkbox" />
