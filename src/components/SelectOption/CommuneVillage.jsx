@@ -4,7 +4,7 @@ const CommuneVillage = () => {
   const data = (
     <>
       <div className="col-md-4">
-        <label for="ReportCityId" className="control-label">
+        <label htmlFor="ReportCityId" className="control-label">
           Commune/village:
           <span className="text-orange-400">*</span>
         </label>
