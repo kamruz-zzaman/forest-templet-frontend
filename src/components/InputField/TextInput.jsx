@@ -1,12 +1,23 @@
-const TextInput = ({ id, type, label, placeholder, require = false }) => {
+const TextInput = ({
+  id,
+  type,
+  label,
+  placeholder,
+  require = false,
+  style,
+}) => {
   return (
-    <div>
-      <label htmlFor={id}>
-        {" "}
-        {label} {require && "*"}{" "}
+    <div className={`flex flex-col my-3 w-full ${style}`}>
+      <label
+        className="uppercase font-bold text-[#333] cursor-pointer"
+        htmlFor={id}
+      >
+        {label} {require && "*"}
       </label>
+
       <input
-        className="border border-primary"
+        id={id}
+        className="border border-primary py-1.5 px-3 outline-none focus:shadow-md"
         type={type}
         placeholder={placeholder}
       />

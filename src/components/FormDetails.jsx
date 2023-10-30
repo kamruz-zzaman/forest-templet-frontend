@@ -7,23 +7,24 @@ import InAForestOf from "./SelectOption/InAForestOf";
 import ClaimPV from "./Upload/ClaimPV";
 
 const FormDetails = () => {
+  // from title
   const fromTitle = (idx, text) => (
     <>
-      <h2>
-        {" "}
+      <h2 className="text-[#333] font-bold text-sm">
         <span> {idx} </span> {text}{" "}
       </h2>
 
-      <hr />
+      <hr className="my-5 border border-[#eee]" />
     </>
   );
+
   return (
     <section className="py-16">
       <div className="container mx-auto">
         <div>
           {/* top description */}
-          <div>
-            <p>
+          <div className="text-sm text-[#333] mb-2">
+            <p className="mb-4">
               In order to provide relevant information and clues to the Forest
               Guard or the local Forest Ranger, it is important to document the
               situation we encounter as well as possible.
@@ -37,121 +38,126 @@ const FormDetails = () => {
           {/* Form */}
           <form>
             {/*  Tell us who you are */}
-            <div>
-              {fromTitle("1. ", " Tell us who you are")}
-
-              {/* Name fields */}
-              <div>
-                {/* First Name */}
-                {
-                  <TextInput
-                    id="firstName"
-                    type="text"
-                    label="first name"
-                    placeholder="Ex: lon"
-                    require={true}
-                  />
-                }
-
-                {/* Name */}
-                {
-                  <TextInput
-                    id="Name"
-                    type="text"
-                    label="name"
-                    placeholder="Ex: Popescu"
-                    require={true}
-                  />
-                }
+            <div className="grid grid-cols-12 gap-8">
+              <div className="col-span-12">
+                {fromTitle("1. ", " Tell us who you are")}
               </div>
 
-              {/* address fields */}
-              <div>
-                {/* Address */}
-                {
-                  <TextInput
-                    id="address"
-                    type="text"
-                    label="address"
-                    placeholder="Ex: Main Street, 21"
-                    require={true}
-                  />
-                }
+              {/* First Name */}
+              {
+                <TextInput
+                  id="firstName"
+                  type="text"
+                  label="first name"
+                  placeholder="Ex: lon"
+                  require={true}
+                  style="col-span-6"
+                />
+              }
 
-                {/* City */}
-                {
-                  <TextInput
-                    id="city"
-                    type="text"
-                    label="City"
-                    placeholder="Ex: lasi"
-                    require={true}
-                  />
-                }
-              </div>
+              {/* Name */}
+              {
+                <TextInput
+                  id="Name"
+                  type="text"
+                  label="name"
+                  placeholder="Ex: Popescu"
+                  require={true}
+                  style="col-span-6"
+                />
+              }
 
-              {/* Contact fields */}
-              <div>
-                {/* TelePhone */}
-                {
-                  <TextInput
-                    id="telephone"
-                    type="text"
-                    label="telephone"
-                    placeholder="Ex: 06468739172"
-                    require={true}
-                  />
-                }
+              {/* Address */}
+              {
+                <TextInput
+                  id="address"
+                  type="text"
+                  label="address"
+                  placeholder="Ex: Main Street, 21"
+                  require={true}
+                  style="col-span-8"
+                />
+              }
 
-                {/* Email */}
-                {
-                  <TextInput
-                    id="email"
-                    type="email"
-                    label="Email"
-                    placeholder="Ex: adresa.ta@mgmail.com"
-                    require={true}
-                  />
-                }
+              {/* City */}
+              {
+                <TextInput
+                  id="city"
+                  type="text"
+                  label="City"
+                  placeholder="Ex: lasi"
+                  require={true}
+                  style="col-span-4"
+                />
+              }
 
-                {/* Ci Series */}
-                {
-                  <TextInput
-                    id="CiSeries"
-                    type="text"
-                    label="ci series"
-                    placeholder="Ex: ds"
-                    require={true}
-                  />
-                }
+              {/* TelePhone */}
+              {
+                <TextInput
+                  style="col-span-4"
+                  id="telephone"
+                  type="text"
+                  label="telephone"
+                  placeholder="Ex: 06468739172"
+                  require={true}
+                />
+              }
 
-                {/* ci number */}
-                {
-                  <TextInput
-                    id="ciNumber"
-                    type="text"
-                    label="ci number"
-                    placeholder="Ex: ds"
-                    require={true}
-                  />
-                }
+              {/* Email */}
+              {
+                <TextInput
+                  style="col-span-4"
+                  id="email"
+                  type="email"
+                  label="Email"
+                  placeholder="Ex: adresa.ta@mgmail.com"
+                  require={true}
+                />
+              }
 
+              {/* Ci Series */}
+              {
+                <TextInput
+                  style="col-span-2"
+                  id="CiSeries"
+                  type="text"
+                  label="ci series"
+                  placeholder="Ex: ds"
+                  require={true}
+                />
+              }
+
+              {/* ci number */}
+              {
+                <TextInput
+                  style="col-span-2"
+                  id="ciNumber"
+                  type="text"
+                  label="ci number"
+                  placeholder="Ex: ds"
+                  require={true}
+                />
+              }
+
+              <div className="col-span-12">
                 <p>
                   {`The personal data will not be published on the site, but we need them to be able to register the notification, according to the regulations in force (Ordinance no. 27/30.01.2002)`}
                 </p>
               </div>
-            </div>
 
-            {/* Tell us where it happened */}
-            <div>
+              {/* Tell us where it happened */}
+              <div className="col-span-12">
+                {fromTitle("2. ", " Tell us where it happened")}
+              </div>
+
               {/* Commune village select */}
-              <div> {<CommuneVillage />} </div>
+              <div className="col-span-8"> {<CommuneVillage />} </div>
 
               {/* When You Noticed */}
-              {<DayMonthYears />}
+              <div className="col-span-4">{<DayMonthYears />}</div>
 
-              {/* Add A Mark */}
-              {<AddAMark />}
+              {/* HELPFUL LANDMARKS or Add A Mark */}
+              <div className="col-span-12">{<AddAMark />}</div>
 
               {/* In A Forest Of  */}
               {<InAForestOf />}
@@ -159,6 +165,7 @@ const FormDetails = () => {
               {/* ON AN AREA OF ​​MINIMUM */}
               {
                 <TextInput
+                  style="col-span-6"
                   id="minimumArea"
                   type="text"
                   label="ON AN AREA OF ​​MINIMUM"
@@ -170,6 +177,7 @@ const FormDetails = () => {
               {/* WITH THE INSCRIPTION */}
               {
                 <TextInput
+                  style="col-span-6"
                   id="minimumArea"
                   type="text"
                   label="WITH THE INSCRIPTION"
@@ -177,56 +185,55 @@ const FormDetails = () => {
                   require={false}
                 />
               }
-            </div>
 
-            {/* Illegal activity you noticed */}
-            <div>
-              {fromTitle(
-                "3. ",
-                ` Tell us who you are ${(<span>(select at least one)</span>)}`
-              )}
+              {/* Illegal activity you noticed */}
+
+              <div className="col-span-12">
+                {fromTitle(
+                  "3. ",
+                  ` Tell us who you are ${(<span>(select at least one)</span>)}`
+                )}
+              </div>
 
               {/* selected checkbox */}
-              <div>{<CheckboxItems />}</div>
+              <div className="col-span-12">{<CheckboxItems />}</div>
+
+              <div className="col-span-12">
+                {fromTitle(
+                  "4. ",
+                  ` Upload photos or video to support your claim: `
+                )}
+              </div>
+            </div>
+            {/* Upload photos or video to support your claim: */}
+
+            {/* upload functionality */}
+            <div>
+              <ClaimPV />
             </div>
 
-            {/* Upload photos or video to support your claim: */}
-            <div>
-              {fromTitle(
-                "4. ",
-                ` Upload photos or video to support your claim: `
-              )}
+            {/* Accept */}
+            <div className="col-span-12">
+              <label htmlFor="acceptAllCn">
+                I have the possibility and availability to travel to the area
+                together with the investigative team
+              </label>
+              <input type="checkbox" name="acceptAllCn" id="acceptAllCn" />
+            </div>
 
-              {/* upload functionality */}
-              <div>
-                <ClaimPV />
-              </div>
-
-              {/* Accept */}
-              <div>
-                <label htmlFor="acceptAllCn">
-                  I have the possibility and availability to travel to the area
-                  together with the investigative team
-                </label>
-                <input type="checkbox" name="acceptAllCn" id="acceptAllCn" />
-              </div>
-
+            <div className="col-span-12">
               <p>
-                {" "}
                 I want you to check the situation in the area and send me the
                 inspection report to the email address provided, as well as to
-                info.romania@greenpeace.org{" "}
+                info.romania@greenpeace.org
               </p>
+            </div>
 
-              <div>
-                <button
-                  type="submit"
-                  className="bg-primary py-2 px-9 rounded-lg"
-                >
-                  {" "}
-                  Send{" "}
-                </button>
-              </div>
+            <div className="col-span-12">
+              <button type="submit" className="bg-primary py-2 px-9 rounded-lg">
+                {" "}
+                Send{" "}
+              </button>
             </div>
           </form>
         </div>

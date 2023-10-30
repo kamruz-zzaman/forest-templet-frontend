@@ -5,17 +5,17 @@ const CheckItem = ({ data }) => {
 
   if (htmlId == "abandonedWood") {
     markup = (
-      <div>
+      <div className="flex items-start justify-start">
         <div>
           <label htmlFor={id}>
-            <div>
-              <figure>
-                <img src={img} alt="" />
+            <div className="flex items-start justify-start">
+              <figure className="w-[6.5rem] h-[6.5rem]">
+                <img className="w-full h-full" src={img} alt="" />
               </figure>
               <span>{label}</span>
             </div>
           </label>
-          <input id={id} type="checkbox" />
+          <input className="hidden" id={id} type="checkbox" />
         </div>
 
         <select
@@ -38,16 +38,16 @@ const CheckItem = ({ data }) => {
     );
   } else {
     markup = (
-      <div>
+      <div className="flex items-start justify-start">
         <label htmlFor={htmlId}>
-          <div>
-            <figure>
-              <img src={img} alt="" />
+          <div className="flex items-start justify-start">
+            <figure className="w-[6.5rem] h-[6.5rem]">
+              <img className="w-full h-full" src={img} alt="" />
             </figure>
             <span>{label}</span>
           </div>
         </label>
-        <input id={htmlId} type="checkbox" />
+        <input className="hidden" id={htmlId} type="checkbox" />
       </div>
     );
   }
