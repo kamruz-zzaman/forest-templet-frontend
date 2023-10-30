@@ -20,8 +20,8 @@ const CheckItem = ({ data }) => {
 
         <select
           name="data[Report][activity_abandoned_wood]"
-          class="form-control select"
-          autocomplete="off"
+          className="form-control select"
+          autoComplete="off"
           data-live-search="1"
           id="ReportActivityAbandonedWood"
         >

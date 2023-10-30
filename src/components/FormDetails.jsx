@@ -2,6 +2,7 @@ import AddAMark from "./AddAMark/AddAMark";
 import CheckboxItems from "./InputField/CheckboxItems";
 import TextInput from "./InputField/TextInput";
 import CommuneVillage from "./SelectOption/CommuneVillage";
+import Country from "./SelectOption/Country";
 import DayMonthYears from "./SelectOption/DayMonthYears";
 import InAForestOf from "./SelectOption/InAForestOf";
 import ClaimPV from "./Upload/ClaimPV";
@@ -19,7 +20,7 @@ const FormDetails = () => {
   );
 
   return (
-    <section className="py-16">
+    <section className="px-32 py-16">
       <div className="container mx-auto">
         <div>
           {/* top description */}
@@ -36,9 +37,9 @@ const FormDetails = () => {
           </div>
 
           {/* Form */}
-          <form>
+          <form className="mt-5">
             {/*  Tell us who you are */}
-            <div className="grid grid-cols-12 gap-8">
+            <div className="grid grid-cols-12 gap-x-8">
               <div className="col-span-12">
                 {fromTitle("1. ", " Tell us who you are")}
               </div>
@@ -139,7 +140,7 @@ const FormDetails = () => {
                 />
               }
 
-              <div className="col-span-12">
+              <div className="col-span-12 mb-5">
                 <p>
                   {`The personal data will not be published on the site, but we need them to be able to register the notification, according to the regulations in force (Ordinance no. 27/30.01.2002)`}
                 </p>
@@ -151,7 +152,8 @@ const FormDetails = () => {
               </div>
 
               {/* Commune village select */}
-              <div className="col-span-8"> {<CommuneVillage />} </div>
+              <div className="col-span-4"> {<CommuneVillage />} </div>
+              <div className="col-span-4"> {<Country />} </div>
 
               {/* When You Noticed */}
               <div className="col-span-4">{<DayMonthYears />}</div>

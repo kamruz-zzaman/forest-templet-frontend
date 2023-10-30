@@ -2,8 +2,8 @@ const Country = () => {
   const data = (
     <select
       name="data[Report][county_id_tmp]"
-      class="form-control select"
-      autocomplete="off"
+      className="border-2 border-primary py-1.5 px-3 outline-none focus:shadow-md rounded w-full"
+      autoComplete="off"
       disabled="disabled"
       data-live-search="1"
       id="ReportCountyIdTmp"

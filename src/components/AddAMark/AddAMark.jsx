@@ -4,8 +4,8 @@ const AddAMark = () => {
   const data = (
     <select
       name="data[marks_tmp]"
-      class="form-control select"
-      autocomplete="off"
+      className="form-control select"
+      autoComplete="off"
       data-live-search="1"
       id="marks_tmp"
     >

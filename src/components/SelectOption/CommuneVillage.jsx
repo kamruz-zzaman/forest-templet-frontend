@@ -3,16 +3,16 @@ import React from "react";
 const CommuneVillage = () => {
   const data = (
     <>
-      <div class="col-md-4">
-        <label for="ReportCityId" class="control-label">
+      <div className="col-md-4">
+        <label for="ReportCityId" className="control-label">
           Commune/village:
-          <span class="color-orange">*</span>
+          <span className="text-orange-400">*</span>
         </label>
-        <div class="required">
+        <div className="required">
           <select
             name="data[Report][city_id]"
-            class="form-control select"
-            autocomplete="off"
+            className="border-2 border-primary py-1.5 px-3 outline-none focus:shadow-md rounded w-full"
+            autoComplete="off"
             data-live-search="1"
             id="ReportCityId"
           >
@@ -2988,156 +2988,7 @@ const CommuneVillage = () => {
       </div>
     </>
   );
-
-  const show = (
-    <>
-      <select name="" id="">
-        <option value="">SELECT</option>
-        <optgroup label="Alba">
-          <option value="1">White</option>
-          <option value="2">Almasu Mare</option>
-          <option value="3">Arians</option>
-          <option value="4">Avram Iancu</option>
-          <option value="5">Berghin</option>
-          <option value="6">Bistro</option>
-          <option value="7">Blandiana</option>
-          <option value="8">Granoasa Bucerdea</option>
-          <option value="9">horn</option>
-          <option value="10">Calnick</option>
-          <option value="11">Cenade</option>
-          <option value="12">rug</option>
-          <option value="13">Asked-Bacainti</option>
-          <option value="14">Citadel of Balta</option>
-          <option value="15">Peeping</option>
-          <option value="16">The curuleasa</option>
-          <option value="17">Jos Christmas</option>
-          <option value="18">jack</option>
-          <option value="19">cut</option>
-          <option value="20">Daia Romana</option>
-          <option value="21">Dostal</option>
-          <option value="22">Without</option>
-          <option value="23">Galda de Jos</option>
-          <option value="24">Upper Guard</option>
-          <option value="25">crook</option>
-          <option value="26">Hopârta</option>
-          <option value="27">hore</option>
-          <option value="28">Ighiu</option>
-          <option value="29">whole</option>
-          <option value="30">Jidvei</option>
-          <option value="31">orchards</option>
-          <option value="32">Lüps</option>
-          <option value="33">The New Shovel</option>
-          <option value="34">The meadow of Mures</option>
-          <option value="35">Metes</option>
-          <option value="36">ling</option>
-          <option value="37">MIRĂSLĂU</option>
-          <option value="38">Mogos</option>
-          <option value="39">Noslac</option>
-          <option value="40">workaround</option>
-          <option value="41">oh</option>
-          <option value="42">Piano</option>
-          <option value="43">The Glade of the Ford</option>
-          <option value="44">slope</option>
-          <option value="45">Postage</option>
-          <option value="46">Rădeşti</option>
-          <option value="47">ramet</option>
-          <option value="48">Rimetea</option>
-          <option value="49">Rosia de Secas</option>
-          <option value="50">Rosia Montana</option>
-          <option value="51">The willow tree</option>
-          <option value="52">Salistia</option>
-          <option value="53">Sasciori</option>
-          <option value="54">Chancel</option>
-          <option value="55">Sântimbru</option>
-          <option value="56">Staircase</option>
-          <option value="57">Tight</option>
-          <option value="58">Sohodol</option>
-          <option value="59">slobber</option>
-          <option value="60">sona</option>
-          <option value="61">spring</option>
-          <option value="62">suck</option>
-          <option value="63">Unirea</option>
-          <option value="64">Vadu Motilor</option>
-          <option value="65">Long Valley</option>
-          <option value="66">Otter</option>
-          <option value="67">Downwind</option>
-          <option value="2875">Nice</option>
-        </optgroup>
-        <optgroup label="Arad">
-          <option value="68">Almas</option>
-          <option value="69">Apathetic</option>
-          <option value="70">Archis</option>
-          <option value="71">Bat</option>
-          <option value="72">Barsa</option>
-          <option value="73">Barzava</option>
-          <option value="74">Belius</option>
-          <option value="75">Birches</option>
-          <option value="76">Boxing</option>
-          <option value="77">trees</option>
-          <option value="78">logs</option>
-          <option value="79">carrying</option>
-          <option value="80">Glasses</option>
-          <option value="81">Chisindia</option>
-          <option value="82">Hemp</option>
-          <option value="83">curdle</option>
-          <option value="84">Craiva</option>
-          <option value="85">cartoon</option>
-          <option value="86">clerks</option>
-          <option value="87">Dorobants</option>
-          <option value="88">The fountains</option>
-          <option value="89">Candle</option>
-          <option value="90">beauty</option>
-          <option value="91">Piglet</option>
-          <option value="92">Border</option>
-          <option value="93">Gurahont</option>
-          <option value="94">Hălmagiu</option>
-          <option value="95">Hălmăgel</option>
-          <option value="96">Hashmas</option>
-          <option value="97">Ignes</option>
-          <option value="98">Irritable</option>
-          <option value="99">Orchard</option>
-          <option value="100">Poppy</option>
-          <option value="101">Move</option>
-          <option value="102">The nun</option>
-          <option value="103">potters</option>
-          <option value="104">Paulis</option>
-          <option value="105">Great Peregu</option>
-          <option value="106">Petris</option>
-          <option value="107">pills</option>
-          <option value="108">flop</option>
-          <option value="109">Savarsin</option>
-          <option value="110">Secession</option>
-          <option value="111">Seleusului</option>
-          <option value="112">Semlac</option>
-          <option value="113">He was Great</option>
-          <option value="114">Socodor</option>
-          <option value="115">sago</option>
-          <option value="116">seitin</option>
-          <option value="117">seperate</option>
-          <option value="118">sicula</option>
-          <option value="119">the cylinder</option>
-          <option value="120">sowing</option>
-          <option value="121">Syria</option>
-          <option value="122">stopped</option>
-          <option value="123">sophrona</option>
-          <option value="124">Taut</option>
-          <option value="125">Tarnova</option>
-          <option value="126">USU</option>
-          <option value="127">Varadia de Mures</option>
-          <option value="128">tips</option>
-          <option value="129">come</option>
-          <option value="130">Vladimirescu</option>
-          <option value="131">Stop it</option>
-          <option value="132">Zadar people</option>
-          <option value="133">Zarand</option>
-          <option value="134">Zerind</option>
-          <option value="135">Zimandu New</option>
-        </optgroup>
-      </select>
-    </>
-  );
-
-  return show;
+  return data;
 };
 
 export default CommuneVillage;

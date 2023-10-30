@@ -4,8 +4,8 @@ const InAForestOf = () => {
   const data = (
     <select
       name="data[Report][forest_type_id]"
-      class="form-control select"
-      autocomplete="off"
+      className="form-control select"
+      autoComplete="off"
       data-live-search="1"
       id="ReportForestTypeId"
     >

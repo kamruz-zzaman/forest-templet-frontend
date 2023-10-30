@@ -6,8 +6,8 @@ const ClaimPV = () => {
         <input
           type="file"
           name="data[Report][image_tmp][]"
-          class="form-control file"
-          autocomplete="off"
+          className="form-control file"
+          autoComplete="off"
           multiple="multiple"
           accept="image/jpeg,image/gif,image/png,video/avi,video/msvideo,video/x-msvideo,video/mpeg,video/x-mpeg,video/quicktime,video/mp4,video/x-flv,application/x-mpegURL,video/3gpp"
           data-show-upload="false"

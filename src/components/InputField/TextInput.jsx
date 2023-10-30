@@ -7,7 +7,7 @@ const TextInput = ({
   style,
 }) => {
   return (
-    <div className={`flex flex-col my-3 w-full ${style}`}>
+    <div className={`flex flex-col my-1 w-full ${style}`}>
       <label
         className="uppercase font-bold text-[#333] cursor-pointer"
         htmlFor={id}
@@ -17,7 +17,7 @@ const TextInput = ({
 
       <input
         id={id}
-        className="border border-primary py-1.5 px-3 outline-none focus:shadow-md"
+        className="border-2 border-primary py-1.5 px-3 outline-none focus:shadow-md rounded"
         type={type}
         placeholder={placeholder}
       />
