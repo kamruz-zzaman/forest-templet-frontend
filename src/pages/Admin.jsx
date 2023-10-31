@@ -3,30 +3,33 @@ import Header from "../components/Header";
 
 const data = [
   {
-    type: "Unmarked and covered stumps",
+    type: ["Unmarked and covered stumps", "Unmarked and covered stumps"],
     address: "some location",
     name: "Mahmud The Engineer",
     email: "mahmud@eng.com",
     status: "Unsolved",
-    media: "url",
+    img: "url",
+    video: "",
     date: "20 Nov 2023",
   },
   {
-    type: "Unmarked and covered stumps",
+    type: ["Unmarked and covered stumps"],
     address: "some location",
     name: "Mahmud The Engineer",
     email: "mahmud@eng.com",
     status: "Unsolved",
-    media: "url",
+    img: "url",
+    video: "",
     date: "20 Nov 2023",
   },
   {
-    type: "Unmarked and covered stumps",
+    type: ["Unmarked and covered stumps"],
     address: "some location",
     name: "Mahmud The Engineer",
     email: "mahmud@eng.com",
     status: "Unsolved",
-    media: "url",
+    img: "url",
+    video: "",
     date: "20 Nov 2023",
   },
 ];
@@ -48,7 +51,17 @@ export default function Admin() {
               </a>
               <div class="p-5">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
-                  {dt.type}
+                  <span className="text-lg font-medium text-gray-700">
+                    Problem Type:
+                  </span>
+                  <br />
+                  {dt?.type.map((m, i) => {
+                    return (
+                      <span key={i} className="block my-1">
+                        {i === dt.type.length - 1 ? m : `${m},`}
+                      </span>
+                    );
+                  })}
                 </h5>
                 <p class="mb-2 font-normal text-gray-700 ">
                   Where it happend: {dt.address}
