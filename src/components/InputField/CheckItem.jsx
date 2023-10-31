@@ -29,7 +29,10 @@ const CheckItem = ({ data, onChangeData, selectedData }) => {
                   data-live-search="1"
                   id="ReportActivityAbandonedWood"
                   value={val}
-                  onChange={(e) => setVal(e.target.value)}
+                  onChange={(e) => {
+                    onChangeData(e.target.value);
+                    setVal(e.target.value);
+                  }}
                 >
                   <option value="">CHOOSE AN OPTION</option>
                   <option value="Parchet">Parquet</option>
@@ -54,13 +57,13 @@ const CheckItem = ({ data, onChangeData, selectedData }) => {
       <div className="flex items-start justify-start">
         <label htmlFor={htmlId}>
           <div
-            onClick={() => onChangeData(_id)}
+            onClick={() => onChangeData(label)}
             className="flex items-center justify-start  cursor-pointer"
           >
             <figure className="w-[6.5rem] h-[6.5rem]">
               <img
                 className={`w-full h-full ${
-                  selectedData?.includes(_id) ? "grayscale-0" : "grayscale"
+                  selectedData?.includes(label) ? "grayscale-0" : "grayscale"
                 }`}
                 src={img}
                 alt=""

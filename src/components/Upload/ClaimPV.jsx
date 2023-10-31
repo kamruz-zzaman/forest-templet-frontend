@@ -22,7 +22,7 @@
 // export default ClaimPV;
 
 import { useState, useRef } from "react";
-export default function FilePreviewer() {
+export default function FilePreviewer({ setInputData, inputData }) {
   const [imagePreview, setImagePreview] = useState(null);
   const [videoPreview, setVideoPreview] = useState(null);
   const filePicekerRef = useRef(null);
@@ -39,15 +39,18 @@ export default function FilePreviewer() {
     // As the File loaded then set the stage as per the file type
     reader.onload = (readerEvent) => {
       if (selectedFile.type.includes("image")) {
+        setInputData({ ...inputData, img: selectedFile });
         setImagePreview(readerEvent.target.result);
       } else if (selectedFile.type.includes("video")) {
         setVideoPreview(readerEvent.target.result);
+        setInputData({ ...inputData, video: selectedFile });
       }
     };
   }
   function clearFiles() {
     setImagePreview(null);
     setVideoPreview(null);
+    setOnSelectFile("");
   }
   return (
     <div>

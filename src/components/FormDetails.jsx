@@ -9,6 +9,8 @@ import DayMonthYears from "./SelectOption/DayMonthYears";
 import InAForestOf from "./SelectOption/InAForestOf";
 import FilePreviewer from "./Upload/ClaimPV";
 import img from "../assets/l.png";
+import { usePlacesWidget } from "react-google-autocomplete";
+import axios from "axios";
 
 const FormDetails = () => {
   // from title
@@ -22,29 +24,87 @@ const FormDetails = () => {
       <hr className="my-5 border border-[#eee]" />
     </>
   );
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-
-  useEffect(() => {
-    // Get the user's geolocation
+  const [inputData, setInputData] = useState({
+    name: "",
+    first_name: "",
+    phone: "",
+    email: "",
+    date: "",
+    reportType: [],
+    latitude: null,
+    longitude: null,
+    address: "",
+    img: "",
+    video: "",
+    availability: false,
+  });
+  const handleButtonClick = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
+        async (position) => {
+          try {
+            const response = await axios.get(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${
+                position.coords.latitude
+              },${position.coords.longitude}&key=${
+                import.meta.env.VITE_GOOGLE_API_KEY
+              }`
+            );
+
+            const locationData = response.data;
+            if (locationData.results.length > 0) {
+              const address = locationData.results[0].formatted_address;
+              setInputData({
+                ...inputData,
+                address: address,
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              });
+            } else {
+              console.log("No address found for this location.");
+            }
+          } catch (error) {
+            console.error("Error getting user address: ", error);
+          }
         },
         (error) => {
+          alert("Please accept to access your current location!");
           console.error(error);
         }
       );
     } else {
+      alert("Please accept to access your current location!");
       console.error("Geolocation is not supported by your browser");
     }
-  }, []);
-  const handleButtonClick = () => {
-    // Handle the button click action here
-    // You can add code to show the user's location on Google Maps
   };
+
+  const { ref } = usePlacesWidget({
+    apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+    onPlaceSelected: (place) => {
+      setInputData({
+        ...inputData,
+        address: place?.formatted_address,
+        latitude: place.geometry.location.lat(),
+        longitude: place.geometry.location.lng(),
+      });
+    },
+  });
+  const handleInputChange = (event) => {
+    setInputData((inputs) => ({
+      ...inputs,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const onHandleSendData = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_SERVER_LINK}/addToMap`, inputData)
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
   return (
     <section className="px-32 py-16">
       <div className="container mx-auto">
@@ -63,76 +123,79 @@ const FormDetails = () => {
           </div>
 
           {/* Form */}
-          <form className="mt-5">
+          <form onSubmit={onHandleSendData} className="mt-5">
             {/*  Tell us who you are */}
             <div className="grid grid-cols-12 gap-x-8">
               <div className="col-span-12">
                 {fromTitle("1. ", " Tell us who you are")}
               </div>
 
-              {/* First Name */}
-              {
-                <TextInput
+              <div className="col-span-6 my-1">
+                <label className="uppercase font-bold text-[#333] cursor-pointer mb-2 block">
+                  First Name
+                </label>
+                <input
+                  type="text"
                   id="firstName"
-                  type="text"
-                  label="first name"
-                  placeholder="Ex: lon"
-                  require={true}
-                  style="col-span-6 mt-1"
-                />
-              }
-
-              {/* Name */}
-              {
-                <TextInput
-                  id="Name"
-                  type="text"
-                  label="name"
+                  label="firstName"
+                  required
                   placeholder="Ex: Popescu"
-                  require={true}
-                  style="col-span-6 mt-1"
+                  name="first_name"
+                  onChange={handleInputChange}
+                  value={inputData.first_name}
+                  className="border-2 w-full border-primary py-1.5 px-3 outline-none focus:shadow-md rounded"
                 />
-              }
-
-              {/* {
-                <TextInput
-                  id="address"
+              </div>
+              <div className="col-span-6 my-1">
+                <label className="uppercase font-bold text-[#333] cursor-pointer mb-2 block">
+                  Name
+                </label>
+                <input
                   type="text"
-                  label="address"
-                  placeholder="Ex: Main Street, 21"
-                  require={true}
-                  style="col-span-8"
+                  id="name"
+                  label="name"
+                  required
+                  placeholder="Ex: Popescu"
+                  name="name"
+                  value={inputData.name}
+                  onChange={handleInputChange}
+                  className="border-2 w-full border-primary py-1.5 px-3 outline-none focus:shadow-md rounded"
                 />
-              }
+              </div>
 
-              {
-                <TextInput
-                  id="city"
-                  type="text"
-                  label="City"
-                  placeholder="Ex: lasi"
-                  require={true}
-                  style="col-span-4"
+              <div className="col-span-6 my-1">
+                <label className="uppercase font-bold text-[#333] cursor-pointer mb-2 block">
+                  Telephone
+                </label>
+                <input
+                  type="tel"
+                  id="telephone"
+                  label="telephone"
+                  required
+                  placeholder="Ex: 06468739172"
+                  name="phone"
+                  onChange={handleInputChange}
+                  value={inputData.phone}
+                  className="border-2 w-full border-primary py-1.5 px-3 outline-none focus:shadow-md rounded"
                 />
-              } */}
+              </div>
 
-              <TextInput
-                style="col-span-6 mt-4"
-                id="telephone"
-                type="text"
-                label="telephone"
-                placeholder="Ex: 06468739172"
-                require={true}
-              />
-
-              <TextInput
-                style="col-span-6 mt-4"
-                id="email"
-                type="email"
-                label="Email"
-                placeholder="Ex: adresa.ta@mgmail.com"
-                require={true}
-              />
+              <div className="col-span-6 my-1">
+                <label className="uppercase font-bold text-[#333] cursor-pointer mb-2 block">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  label="email"
+                  required
+                  placeholder="Ex: adresa.ta@mgmail.com"
+                  name="email"
+                  value={inputData.email}
+                  onChange={handleInputChange}
+                  className="border-2 w-full border-primary py-1.5 px-3 outline-none focus:shadow-md rounded"
+                />
+              </div>
 
               <div className="col-span-12 mb-8 mt-4">
                 <p>
@@ -146,18 +209,42 @@ const FormDetails = () => {
               </div>
 
               {/* Commune village select */}
-              <div className="col-span-6">
+              <div className="col-span-6 my-1">
                 <label className="uppercase font-bold text-[#333] cursor-pointer mb-2 block">
                   Type Address
                 </label>
                 <input
                   type="text"
+                  ref={ref}
+                  value={inputData.address}
+                  onChange={(e) =>
+                    setInputData({
+                      ...inputData,
+                      address: e.target.value,
+                    })
+                  }
+                  className="border-2 w-full border-primary py-1.5 px-3 outline-none focus:shadow-md rounded"
+                />
+              </div>
+
+              <div className="col-span-6 my-1">
+                <label className="uppercase font-bold text-[#333] cursor-pointer mb-2 block">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  id="date"
+                  label="date"
+                  required
+                  name="date"
+                  value={inputData.date}
+                  onChange={handleInputChange}
                   className="border-2 w-full border-primary py-1.5 px-3 outline-none focus:shadow-md rounded"
                 />
               </div>
 
               {/* When You Noticed */}
-              <div className="col-span-4">{<DayMonthYears />}</div>
+              {/* <div className="col-span-4">{<DayMonthYears />}</div> */}
 
               <div className="col-span-12 mt-8">
                 {/* {latitude && longitude && (
@@ -167,7 +254,11 @@ const FormDetails = () => {
                     Longitude: {longitude}
                   </p>
                 )} */}
-                <button className="border flex gap-1 px-8 py-2">
+                <button
+                  onClick={handleButtonClick}
+                  type="button"
+                  className="border flex gap-1 px-8 py-2"
+                >
                   Locate Me <img src={img} alt="" />
                 </button>
               </div>
@@ -183,7 +274,14 @@ const FormDetails = () => {
               </div>
 
               {/* selected checkbox */}
-              <div className="col-span-12">{<CheckboxItems />}</div>
+              <div className="col-span-12">
+                {
+                  <CheckboxItems
+                    setInputData={setInputData}
+                    inputData={inputData}
+                  />
+                }
+              </div>
 
               <div className="col-span-12 mt-16">
                 {fromTitle(
@@ -196,12 +294,22 @@ const FormDetails = () => {
 
             {/* upload functionality */}
             <div>
-              <FilePreviewer />
+              <FilePreviewer
+                setInputData={setInputData}
+                inputData={inputData}
+              />
             </div>
 
             {/* Accept */}
             <div className="col-span-12 my-3">
-              <input type="checkbox" name="acceptAllCn" id="acceptAllCn" />
+              <input
+                onChange={(e) =>
+                  setInputData({ ...inputData, availability: e.target.checked })
+                }
+                value={inputData.availability}
+                type="checkbox"
+                id="acceptAllCn"
+              />
               <label className="font-bold ml-2" htmlFor="acceptAllCn">
                 I have the possibility and availability to travel to the area
                 together with the investigative team

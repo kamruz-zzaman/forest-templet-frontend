@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CheckItem from "./CheckItem";
 
-const CheckboxItems = () => {
+const CheckboxItems = ({ setInputData, inputData }) => {
   const data = [
     {
       _id: 1,
@@ -54,7 +54,7 @@ const CheckboxItems = () => {
     {
       _id: 10,
       htmlId: "informationBoard",
-      label: "Riverbed Crossed without protection",
+      label: "Parquet floor without information board",
       img: "https://cdn.salvezpadurea.ro/img/uploads/activities/577a4011-ebf0-4fd2-8f6e-4ecf5d724059.png",
     },
     {
@@ -100,13 +100,17 @@ const CheckboxItems = () => {
       img: "https://cdn.salvezpadurea.ro/img/uploads/activities/577a40c3-51a8-41ef-bc78-4f545d724059.png",
     },
   ];
-  const [selectedData, setSelectedData] = useState([]);
-  const onChangeData = (id) => {
-    console.log(id);
-    if (selectedData.includes(id)) {
-      setSelectedData(selectedData?.filter((fill) => fill !== id));
+  const onChangeData = (data) => {
+    if (inputData.reportType.includes(data)) {
+      setInputData({
+        ...inputData,
+        reportType: inputData.reportType?.filter((fill) => fill !== data),
+      });
     } else {
-      setSelectedData([...selectedData, id]);
+      setInputData({
+        ...inputData,
+        reportType: [...inputData.reportType, data],
+      });
     }
   };
   return (
@@ -119,7 +123,7 @@ const CheckboxItems = () => {
               <CheckItem
                 data={d}
                 onChangeData={onChangeData}
-                selectedData={selectedData}
+                selectedData={inputData.reportType}
               />
             </div>
           ))}
