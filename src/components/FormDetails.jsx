@@ -26,11 +26,10 @@ const FormDetails = () => {
     date: "",
     reportType: [],
 
-    address: {
-      latitude: null,
-      longitude: null,
-      add: "",
-    },
+    latitude: null,
+    longitude: null,
+    address: "",
+
     img: "",
     video: "",
     availability: false,
@@ -105,6 +104,12 @@ const FormDetails = () => {
     formData.append("latitude", inputData.latitude);
     formData.append("longitude", inputData.longitude);
     formData.append("address", inputData.address);
+    // const add = {
+    //   latitude: inputData?.latitude,
+    //   longitude: inputData?.longitude,
+    //   add: inputData.address,
+    // };
+    // formData.append("address", add);
     formData.append("availability", inputData.availability);
     formData.append(
       "file",

@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 const LeafletMap = () => {
@@ -6,6 +8,16 @@ const LeafletMap = () => {
   const position2 = [23.747394661128048, 90.4001925942668];
   const position3 = [23.747407393393612, 90.40221347518201];
   const position4 = [23.747656486792664, 90.40359871846833];
+  const [info, setInfo] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get("http://localhost:5000/api/forest");
+      const locationData = await response.data;
+      setInfo(locationData?.data);
+    };
+    getData();
+  }, []);
   return (
     <div>
       <MapContainer
@@ -18,7 +30,18 @@ const LeafletMap = () => {
           attribution="UZH"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={position}>
+        {info?.length &&
+          info?.map((inf, i) => {
+            const pos = [inf?.address?.latitude, inf?.address?.longitude];
+            return (
+              <Marker position={pos} key={i}>
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
+            );
+          })}
+        {/* <Marker position={position}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
@@ -42,7 +65,7 @@ const LeafletMap = () => {
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
-        </Marker>
+        </Marker> */}
       </MapContainer>
       <div className="flex justify-center items-center">
         <div className="absolute z-[500] top-[14.5em] ">

@@ -90,9 +90,21 @@ export default function Admin() {
                   key={i}
                   class="max-w-sm bg-white border border-gray-200 rounded-lg shadow "
                 >
-                  <a href="#">
-                    <img class="rounded-t-lg" src={dt?.img} alt="" />
-                  </a>
+                  {dt?.img && (
+                    <img
+                      class="rounded-t-lg"
+                      src={`http://localhost:5000/${dt.img}`}
+                      alt=""
+                    />
+                  )}
+                  {dt?.video && (
+                    <video width="640" height="360" controls>
+                      <source
+                        src={`http://localhost:5000/${dt?.video}`}
+                        type="video/mp4"
+                      />
+                    </video>
+                  )}
                   <div class="p-5">
                     <div class="mb-2 text-2xl font-semibold tracking-tight text-gray-800 ">
                       <p className="text-lg font-medium text-gray-700  ">
