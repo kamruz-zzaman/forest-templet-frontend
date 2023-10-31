@@ -1,12 +1,5 @@
-import { useEffect, useState } from "react";
-import AddAMark from "./AddAMark/AddAMark";
+import { useState } from "react";
 import CheckboxItems from "./InputField/CheckboxItems";
-import TextInput from "./InputField/TextInput";
-import AdjacentTrees from "./SelectOption/AdjacentTrees";
-import CommuneVillage from "./SelectOption/CommuneVillage";
-import Country from "./SelectOption/Country";
-import DayMonthYears from "./SelectOption/DayMonthYears";
-import InAForestOf from "./SelectOption/InAForestOf";
 import FilePreviewer from "./Upload/ClaimPV";
 import img from "../assets/l.png";
 import { usePlacesWidget } from "react-google-autocomplete";
@@ -24,6 +17,7 @@ const FormDetails = () => {
       <hr className="my-5 border border-[#eee]" />
     </>
   );
+
   const [inputData, setInputData] = useState({
     name: "",
     first_name: "",
@@ -86,11 +80,9 @@ const FormDetails = () => {
     onPlaceSelected: (place) => {
       setInputData((inputs) => ({
         ...inputs,
-        address: {
-          latitude: place.geometry.location.lat(),
-          longitude: place.geometry.location.lng(),
-          add: place?.formatted_address,
-        },
+        address: place?.formatted_address,
+        latitude: place.geometry.location.lat(),
+        longitude: place.geometry.location.lng(),
       }));
     },
   });
@@ -103,8 +95,37 @@ const FormDetails = () => {
 
   const onHandleSendData = (e) => {
     e.preventDefault();
+    let formData = new FormData();
+    formData.append("name", inputData.name);
+    formData.append("first_name", inputData.first_name);
+    formData.append("phone", inputData.phone);
+    formData.append("email", inputData.email);
+    formData.append("date", inputData.date);
+    formData.append("reportType", inputData.reportType);
+    formData.append("latitude", inputData.latitude);
+    formData.append("longitude", inputData.longitude);
+    formData.append("address", inputData.address);
+    formData.append("availability", inputData.availability);
+    formData.append(
+      "file",
+      inputData.img !== ""
+        ? inputData.img
+        : inputData.video !== "" && inputData.video
+    );
+    //  name: "",
+    //     first_name: "",
+    //     phone: "",
+    //     email: "",
+    //     date: "",
+    //     reportType: [],
+    //     latitude: null,
+    //     longitude: null,
+    //     address: "",
+    //     img: "",
+    //     video: "",
+    //     availability: false,
     axios
-      .post(`${import.meta.env.VITE_SERVER_LINK}/addToMap`, inputData)
+      .post(`${import.meta.env.VITE_SERVER_LINK}/addToMap`, formData)
       .then((res) => {
         console.log(res);
       });
