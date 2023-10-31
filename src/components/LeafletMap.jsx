@@ -9,7 +9,7 @@ const LeafletMap = () => {
   return (
     <div>
       <MapContainer
-        className="z-10"
+        className="z-10 w-full"
         center={position}
         zoom={13}
         scrollWheelZoom={true}
@@ -45,7 +45,7 @@ const LeafletMap = () => {
         </Marker>
       </MapContainer>
       <div className="flex justify-center items-center">
-        <div className="absolute z-[500] top-[11.5em] ">
+        <div className="absolute z-[500] top-[14.5em] ">
           <button className="bg-white text-black font-bold rounded-md px-5 py-2 me-2">
             Solved
           </button>

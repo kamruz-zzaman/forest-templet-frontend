@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import AddAMark from "./AddAMark/AddAMark";
 import CheckboxItems from "./InputField/CheckboxItems";
 import TextInput from "./InputField/TextInput";
@@ -7,6 +8,7 @@ import Country from "./SelectOption/Country";
 import DayMonthYears from "./SelectOption/DayMonthYears";
 import InAForestOf from "./SelectOption/InAForestOf";
 import FilePreviewer from "./Upload/ClaimPV";
+import img from "../assets/l.png";
 
 const FormDetails = () => {
   // from title
@@ -20,7 +22,29 @@ const FormDetails = () => {
       <hr className="my-5 border border-[#eee]" />
     </>
   );
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
+  useEffect(() => {
+    // Get the user's geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by your browser");
+    }
+  }, []);
+  const handleButtonClick = () => {
+    // Handle the button click action here
+    // You can add code to show the user's location on Google Maps
+  };
   return (
     <section className="px-32 py-16">
       <div className="container mx-auto">
@@ -54,7 +78,7 @@ const FormDetails = () => {
                   label="first name"
                   placeholder="Ex: lon"
                   require={true}
-                  style="col-span-6"
+                  style="col-span-6 mt-1"
                 />
               }
 
@@ -66,12 +90,11 @@ const FormDetails = () => {
                   label="name"
                   placeholder="Ex: Popescu"
                   require={true}
-                  style="col-span-6"
+                  style="col-span-6 mt-1"
                 />
               }
 
-              {/* Address */}
-              {
+              {/* {
                 <TextInput
                   id="address"
                   type="text"
@@ -82,7 +105,6 @@ const FormDetails = () => {
                 />
               }
 
-              {/* City */}
               {
                 <TextInput
                   id="city"
@@ -92,57 +114,27 @@ const FormDetails = () => {
                   require={true}
                   style="col-span-4"
                 />
-              }
+              } */}
 
-              {/* TelePhone */}
-              {
-                <TextInput
-                  style="col-span-4"
-                  id="telephone"
-                  type="text"
-                  label="telephone"
-                  placeholder="Ex: 06468739172"
-                  require={true}
-                />
-              }
+              <TextInput
+                style="col-span-6 mt-4"
+                id="telephone"
+                type="text"
+                label="telephone"
+                placeholder="Ex: 06468739172"
+                require={true}
+              />
 
-              {/* Email */}
-              {
-                <TextInput
-                  style="col-span-4"
-                  id="email"
-                  type="email"
-                  label="Email"
-                  placeholder="Ex: adresa.ta@mgmail.com"
-                  require={true}
-                />
-              }
+              <TextInput
+                style="col-span-6 mt-4"
+                id="email"
+                type="email"
+                label="Email"
+                placeholder="Ex: adresa.ta@mgmail.com"
+                require={true}
+              />
 
-              {/* Ci Series */}
-              {
-                <TextInput
-                  style="col-span-2"
-                  id="CiSeries"
-                  type="text"
-                  label="ci series"
-                  placeholder="Ex: ds"
-                  require={true}
-                />
-              }
-
-              {/* ci number */}
-              {
-                <TextInput
-                  style="col-span-2"
-                  id="ciNumber"
-                  type="text"
-                  label="ci number"
-                  placeholder="Ex: ds"
-                  require={true}
-                />
-              }
-
-              <div className="col-span-12 mb-5">
+              <div className="col-span-12 mb-8 mt-4">
                 <p>
                   {`The personal data will not be published on the site, but we need them to be able to register the notification, according to the regulations in force (Ordinance no. 27/30.01.2002)`}
                 </p>
@@ -154,45 +146,35 @@ const FormDetails = () => {
               </div>
 
               {/* Commune village select */}
-              <div className="col-span-4"> {<CommuneVillage />} </div>
-              <div className="col-span-4"> {<Country />} </div>
+              <div className="col-span-6">
+                <label className="uppercase font-bold text-[#333] cursor-pointer mb-2 block">
+                  Type Address
+                </label>
+                <input
+                  type="text"
+                  className="border-2 w-full border-primary py-1.5 px-3 outline-none focus:shadow-md rounded"
+                />
+              </div>
 
               {/* When You Noticed */}
               <div className="col-span-4">{<DayMonthYears />}</div>
 
-              {/* HELPFUL LANDMARKS or Add A Mark */}
-              <div className="col-span-12">{<AddAMark />}</div>
-              <div className="col-span-6"> {<InAForestOf />}</div>
-
-              {/* In A Forest Of  */}
-
-              {/* ON AN AREA OF ​​MINIMUM */}
-              {
-                <TextInput
-                  style="col-span-6 mt-2"
-                  id="minimumArea"
-                  type="text"
-                  label="ON AN AREA OF ​​MINIMUM"
-                  placeholder=" "
-                  require={true}
-                />
-              }
-              <div className="col-span-6"> {<AdjacentTrees />}</div>
-              {/* WITH THE INSCRIPTION */}
-              {
-                <TextInput
-                  style="col-span-6 mt-1"
-                  id="minimumArea"
-                  type="text"
-                  label="WITH THE INSCRIPTION"
-                  placeholder=" "
-                  require={false}
-                />
-              }
+              <div className="col-span-12 mt-8">
+                {/* {latitude && longitude && (
+                  <p>
+                    Latitude: {latitude}
+                    <br />
+                    Longitude: {longitude}
+                  </p>
+                )} */}
+                <button className="border flex gap-1 px-8 py-2">
+                  Locate Me <img src={img} alt="" />
+                </button>
+              </div>
 
               {/* Illegal activity you noticed */}
 
-              <div className="col-span-12 my-2">
+              <div className="col-span-12 my-4 mt-8">
                 {fromTitle(
                   "3. ",
                   ` Tell us who you are`,
@@ -203,7 +185,7 @@ const FormDetails = () => {
               {/* selected checkbox */}
               <div className="col-span-12">{<CheckboxItems />}</div>
 
-              <div className="col-span-12">
+              <div className="col-span-12 mt-16">
                 {fromTitle(
                   "4. ",
                   ` Upload photos or video to support your claim: `

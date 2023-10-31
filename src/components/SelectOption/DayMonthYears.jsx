@@ -24,10 +24,10 @@ const DayMonthYears = () => {
         className="uppercase font-bold text-[#333] cursor-pointer"
         htmlFor="years"
       >
-        ON AN AREA OF ​MINIMUM: *
+        Date *
       </label>
 
-      <div className="flex">
+      <div className="flex mt-2">
         {/* year */}
         <div className="sm:px-[3px] ">
           <select

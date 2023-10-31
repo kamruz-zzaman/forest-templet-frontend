@@ -9,7 +9,7 @@ const TextInput = ({
   return (
     <div className={`flex flex-col my-1 w-full ${style}`}>
       <label
-        className="uppercase font-bold text-[#333] cursor-pointer"
+        className="uppercase font-bold text-[#333] cursor-pointer mb-2"
         htmlFor={id}
       >
         {label} {require && "*"}

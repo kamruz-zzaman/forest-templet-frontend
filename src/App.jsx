@@ -7,7 +7,12 @@ function App() {
   return (
     <div className=" relative">
       <Header />
-      <LeafletMap />
+      <div
+        className="max-w-7xl mx-auto mt-12
+     "
+      >
+        <LeafletMap />
+      </div>
       <FormDetails />
     </div>
   );

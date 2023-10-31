@@ -32,6 +32,8 @@ export default function Login() {
         })
       );
       navigate("/admin");
+    } else {
+      alert("wrong credientials");
     }
   };
   return (
