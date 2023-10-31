@@ -31,9 +31,12 @@ const FormDetails = () => {
     email: "",
     date: "",
     reportType: [],
-    latitude: null,
-    longitude: null,
-    address: "",
+
+    address: {
+      latitude: null,
+      longitude: null,
+      add: "",
+    },
     img: "",
     video: "",
     availability: false,
@@ -81,12 +84,14 @@ const FormDetails = () => {
   const { ref } = usePlacesWidget({
     apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
     onPlaceSelected: (place) => {
-      setInputData({
-        ...inputData,
-        address: place?.formatted_address,
-        latitude: place.geometry.location.lat(),
-        longitude: place.geometry.location.lng(),
-      });
+      setInputData((inputs) => ({
+        ...inputs,
+        address: {
+          latitude: place.geometry.location.lat(),
+          longitude: place.geometry.location.lng(),
+          add: place?.formatted_address,
+        },
+      }));
     },
   });
   const handleInputChange = (event) => {
@@ -216,7 +221,7 @@ const FormDetails = () => {
                 <input
                   type="text"
                   ref={ref}
-                  value={inputData.address}
+                  value={inputData.address.add}
                   onChange={(e) =>
                     setInputData({
                       ...inputData,
@@ -320,7 +325,7 @@ const FormDetails = () => {
               <p>
                 I want you to check the situation in the area and send me the
                 inspection report to the email address provided, as well as to
-                info.romania@greenpeace.org
+                info.admin@forest.org
               </p>
             </div>
 

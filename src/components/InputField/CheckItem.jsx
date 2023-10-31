@@ -10,12 +10,10 @@ const CheckItem = ({ data, onChangeData, selectedData }) => {
         <div className="">
           <label htmlFor={_id}>
             <div className="flex items-start justify-start">
-              <figure className="w-[6.5rem] h-[6.5rem]">
+              <figure className="w-24">
                 {/* <img className="w-full h-full " src={img} alt="" /> */}
                 <img
-                  className={`w-full h-full ${
-                    val ? "grayscale-0" : "grayscale"
-                  }`}
+                  className={`w-full ${val ? "grayscale-0" : "grayscale"}`}
                   src={img}
                   alt=""
                 />
@@ -24,7 +22,7 @@ const CheckItem = ({ data, onChangeData, selectedData }) => {
                 <span className="">{label}</span>
                 <select
                   name="data[Report][activity_abandoned_wood]"
-                  className="form-control select block mx-4 mt-2"
+                  className="form-control select block mx-4 mt-2 text-center"
                   autoComplete="off"
                   data-live-search="1"
                   id="ReportActivityAbandonedWood"
@@ -58,18 +56,18 @@ const CheckItem = ({ data, onChangeData, selectedData }) => {
         <label htmlFor={htmlId}>
           <div
             onClick={() => onChangeData(label)}
-            className="flex items-center justify-start  cursor-pointer"
+            className="flex items-center  cursor-pointer"
           >
-            <figure className="w-[6.5rem] h-[6.5rem]">
+            <figure className="w-24 ">
               <img
-                className={`w-full h-full ${
+                className={`w-full ${
                   selectedData?.includes(label) ? "grayscale-0" : "grayscale"
                 }`}
                 src={img}
                 alt=""
               />
             </figure>
-            <span className="ms-2">{label}</span>
+            <p className="ms-2 ">{label}</p>
           </div>
         </label>
         <input className="hidden" id={htmlId} type="checkbox" />
