@@ -22,11 +22,17 @@
 // export default ClaimPV;
 
 import { useState, useRef } from "react";
-export default function FilePreviewer({ setInputData, inputData }) {
-  const [imagePreview, setImagePreview] = useState(null);
-  const [videoPreview, setVideoPreview] = useState(null);
+export default function FilePreviewer({
+  setInputData,
+  inputData,
+  imagePreview,
+  setImagePreview,
+  videoPreview,
+  setVideoPreview,
+  onSelectFile,
+  setOnSelectFile,
+}) {
   const filePicekerRef = useRef(null);
-  const [onSelectFile, setOnSelectFile] = useState("");
   function previewFile(e) {
     // Reading New File (open file Picker Box)
     const reader = new FileReader();

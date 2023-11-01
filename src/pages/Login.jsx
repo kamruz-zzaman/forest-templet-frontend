@@ -11,7 +11,6 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (eamil === "admin@forest.com" && password === "123456") {
-      console.log("came");
       sessionStorage.setItem(
         "authUser",
         JSON.stringify({

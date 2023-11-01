@@ -18,6 +18,11 @@ const FormDetails = () => {
     </>
   );
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
   const [inputData, setInputData] = useState({
     name: "",
     first_name: "",
@@ -129,12 +134,43 @@ const FormDetails = () => {
     //     img: "",
     //     video: "",
     //     availability: false,
-    axios
-      .post(`${import.meta.env.VITE_SERVER_LINK}/addToMap`, formData)
-      .then((res) => {
-        console.log(res);
-      });
+    if (inputData.latitude && inputData.longitude) {
+      axios
+        .post(`${import.meta.env.VITE_SERVER_LINK}/addToMap`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            setInputData({
+              name: "",
+              first_name: "",
+              phone: "",
+              email: "",
+              date: "",
+              reportType: [],
+
+              latitude: null,
+              longitude: null,
+              address: "",
+
+              img: "",
+              video: "",
+              availability: false,
+            });
+            openModal();
+          }
+        });
+    } else {
+      alert(
+        "Check the address again. Try removing, search add from suggetions!"
+      );
+    }
   };
+  const [imagePreview, setImagePreview] = useState(null);
+  const [videoPreview, setVideoPreview] = useState(null);
+  const [onSelectFile, setOnSelectFile] = useState("");
 
   return (
     <section className="px-32 py-16">
@@ -247,7 +283,7 @@ const FormDetails = () => {
                 <input
                   type="text"
                   ref={ref}
-                  value={inputData.address.add}
+                  value={inputData?.address}
                   onChange={(e) =>
                     setInputData({
                       ...inputData,
@@ -328,6 +364,12 @@ const FormDetails = () => {
               <FilePreviewer
                 setInputData={setInputData}
                 inputData={inputData}
+                imagePreview={imagePreview}
+                setImagePreview={setImagePreview}
+                videoPreview={videoPreview}
+                setVideoPreview={setVideoPreview}
+                onSelectFile={onSelectFile}
+                setOnSelectFile={setOnSelectFile}
               />
             </div>
 
@@ -339,6 +381,7 @@ const FormDetails = () => {
                 }
                 value={inputData.availability}
                 type="checkbox"
+                checked={inputData.availability}
                 id="acceptAllCn"
               />
               <label className="font-bold ml-2" htmlFor="acceptAllCn">
@@ -351,7 +394,7 @@ const FormDetails = () => {
               <p>
                 I want you to check the situation in the area and send me the
                 inspection report to the email address provided, as well as to
-                info.admin@forest.org
+                forestwatch000@gmail.com
               </p>
             </div>
 
@@ -368,6 +411,45 @@ const FormDetails = () => {
           </form>
         </div>
       </div>
+      {isOpen && (
+        // Modal structure here
+        <div class="fixed z-10 inset-0 overflow-y-auto">
+          <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity">
+              <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
+              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                  <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <i class="fas fa-check text-green-600"></i>
+                  </div>
+                  <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                      Sucessfully Submitted a request.
+                    </h3>
+                    <div class="mt-2">
+                      <p class="text-sm text-gray-500">
+                        We will be verifying it.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                  type="button"
+                  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-8 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={closeModal}
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

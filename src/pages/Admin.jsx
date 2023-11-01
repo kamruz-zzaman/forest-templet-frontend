@@ -2,39 +2,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
 
-const data = [
-  {
-    type: ["Unmarked and covered stumps", "Unmarked and covered stumps"],
-    address: "some location",
-    name: "Mahmud The Engineer",
-    email: "mahmud@eng.com",
-    status: "Unsolved",
-    img: "url",
-    video: "",
-    date: "20 Nov 2023",
-  },
-  {
-    type: ["Unmarked and covered stumps"],
-    address: "some location",
-    name: "Mahmud The Engineer",
-    email: "mahmud@eng.com",
-    status: "Unsolved",
-    img: "url",
-    video: "",
-    date: "20 Nov 2023",
-  },
-  {
-    type: ["Unmarked and covered stumps"],
-    address: "some location",
-    name: "Mahmud The Engineer",
-    email: "mahmud@eng.com",
-    status: "Unsolved",
-    img: "url",
-    video: "",
-    date: "20 Nov 2023",
-  },
-];
-
 export default function Admin() {
   const [info, setInfo] = useState([]);
 
@@ -53,7 +20,6 @@ export default function Admin() {
         ...dt,
         status: "solved",
       };
-      console.log("here");
       axios
         .put(`http://localhost:5000/api/update/${dt?._id}`, updatedData)
         .then((res) => {
@@ -92,7 +58,7 @@ export default function Admin() {
                 >
                   {dt?.img && (
                     <img
-                      class="rounded-t-lg"
+                      class="rounded-t-lg w-full"
                       src={`http://localhost:5000/${dt.img}`}
                       alt=""
                     />
