@@ -10,7 +10,7 @@ export default function Login() {
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
-    if (eamil === "admin@forest.com" && password === "123456") {
+    if (eamil === "forestwatch000@gmail.com" && password === "123456") {
       sessionStorage.setItem(
         "authUser",
         JSON.stringify({

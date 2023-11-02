@@ -136,7 +136,7 @@ const FormDetails = () => {
     //     availability: false,
     if (inputData.latitude && inputData.longitude) {
       axios
-        .post(`${import.meta.env.VITE_SERVER_LINK}/addToMap`, formData, {
+        .post(`${import.meta.env.VITE_SERVER_LINK}/api/addToMap`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

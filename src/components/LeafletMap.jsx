@@ -13,7 +13,9 @@ const LeafletMap = () => {
   const { data } = useSelector((state) => state.forest);
   useEffect(() => {
     const getData = async () => {
-      const response = await axios.get("http://localhost:5000/api/forest");
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_LINK}/api/forest`
+      );
       const locationData = await response.data;
       setInfo(locationData?.data.filter((inf, i) => inf.approve));
       dispatch(setdata(locationData?.data.filter((inf, i) => inf.approve)));
@@ -43,6 +45,7 @@ const LeafletMap = () => {
         />
         {info?.length &&
           info?.map((dt, i) => {
+            console.log(dt);
             const pos = [dt?.address?.latitude, dt?.address?.longitude];
             return (
               <Marker position={pos} key={i} icon={customIcon}>
@@ -51,14 +54,14 @@ const LeafletMap = () => {
                   {dt?.img && (
                     <img
                       class="rounded-t-lg w-full"
-                      src={`http://localhost:5000/${dt.img}`}
+                      src={`${import.meta.env.VITE_SERVER_LINK}/${dt.img}`}
                       alt=""
                     />
                   )}
                   {dt?.video && (
                     <video width="640" height="360" controls>
                       <source
-                        src={`http://localhost:5000/${dt?.video}`}
+                        src={`${import.meta.env.VITE_SERVER_LINK}/${dt?.video}`}
                         type="video/mp4"
                       />
                     </video>
