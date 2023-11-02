@@ -71,14 +71,16 @@ export default function Admin() {
                 {dt?.img && (
                   <img
                     class="rounded-t-lg w-full"
-                    src={`${import.meta.env.VITE_SERVER_LINK}/${dt.img}`}
+                    src={`${import.meta.env.VITE_LIVE_IMAGE_LINK}/${dt.img}`}
                     alt=""
                   />
                 )}
                 {dt?.video && (
                   <video width="640" height="360" controls>
                     <source
-                      src={`${import.meta.env.VITE_SERVER_LINK}/${dt?.video}`}
+                      src={`${import.meta.env.VITE_LIVE_IMAGE_LINK}/${
+                        dt?.video
+                      }`}
                       type="video/mp4"
                     />
                   </video>
