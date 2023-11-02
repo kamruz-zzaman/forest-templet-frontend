@@ -14,14 +14,16 @@ function App() {
         <LeafletMap />
       </div>
       <FormDetails />
-      <footer class="border border-gray-100 text-gray-800 py-6">
-        <div class="container mx-auto text-center">
-          <p class="text-lg">&copy; 2023 Forest Watch. All rights reserved.</p>
-          <p class="mt-2">
+      <footer className="border border-gray-100 text-gray-800 py-6">
+        <div className="container mx-auto text-center">
+          <p className="text-lg">
+            &copy; 2023 Forest Watch. All rights reserved.
+          </p>
+          <p className="mt-2">
             Contact us at{" "}
             <a
               href="mailto:forestwatch000@gmail.com"
-              class="text-blue-300 hover:text-blue-400"
+              className="text-blue-300 hover:text-blue-400"
             >
               forestwatch000@gmail.com
             </a>

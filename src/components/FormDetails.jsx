@@ -22,7 +22,7 @@ const FormDetails = () => {
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
-
+  const [loading, setLoading] = useState(false);
   const [inputData, setInputData] = useState({
     name: "",
     first_name: "",
@@ -85,8 +85,8 @@ const FormDetails = () => {
       setInputData((inputs) => ({
         ...inputs,
         address: place?.formatted_address,
-        latitude: place.geometry.location.lat(),
-        longitude: place.geometry.location.lng(),
+        latitude: place?.geometry?.location?.lat(),
+        longitude: place?.geometry?.location?.lng(),
       }));
     },
   });
@@ -97,50 +97,54 @@ const FormDetails = () => {
     }));
   };
 
+  const [imagePreview, setImagePreview] = useState(null);
+  const [onSelectFile, setOnSelectFile] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+
   const onHandleSendData = (e) => {
     e.preventDefault();
-    let formData = new FormData();
-    formData.append("name", inputData.name);
-    formData.append("first_name", inputData.first_name);
-    formData.append("phone", inputData.phone);
-    formData.append("email", inputData.email);
-    formData.append("date", inputData.date);
-    formData.append("reportType", inputData.reportType);
-    formData.append("latitude", inputData.latitude);
-    formData.append("longitude", inputData.longitude);
-    formData.append("address", inputData.address);
-    // const add = {
-    //   latitude: inputData?.latitude,
-    //   longitude: inputData?.longitude,
-    //   add: inputData.address,
-    // };
-    // formData.append("address", add);
-    formData.append("availability", inputData.availability);
-    formData.append(
-      "file",
-      inputData.img !== ""
-        ? inputData.img
-        : inputData.video !== "" && inputData.video
-    );
-    //  name: "",
-    //     first_name: "",
-    //     phone: "",
-    //     email: "",
-    //     date: "",
-    //     reportType: [],
-    //     latitude: null,
-    //     longitude: null,
-    //     address: "",
-    //     img: "",
-    //     video: "",
-    //     availability: false,
+    const data = {
+      name: inputData.name,
+      first_name: inputData.first_name,
+      phone: inputData.phone,
+      email: inputData.email,
+      date: inputData.date,
+      reportType: inputData.reportType,
+      latitude: inputData.latitude,
+      longitude: inputData.longitude,
+      address: inputData.address,
+      availability: inputData.availability,
+      img: imgUrl,
+    };
+    // let formData = new FormData();
+    // formData.append("name", inputData.name);
+    // formData.append("first_name", inputData.first_name);
+    // formData.append("phone", inputData.phone);
+    // formData.append("email", inputData.email);
+    // formData.append("date", inputData.date);
+    // formData.append("reportType", inputData.reportType);
+    // formData.append("latitude", inputData.latitude);
+    // formData.append("longitude", inputData.longitude);
+    // formData.append("address", inputData.address);
+    // formData.append("availability", inputData.availability);
+    // formData.append(
+    //   "file",
+    //   inputData.img !== ""
+    //     ? inputData.img
+    //     : inputData.video !== "" && inputData.video
+    // );
+
     if (inputData.latitude && inputData.longitude) {
       axios
-        .post(`${import.meta.env.VITE_SERVER_LINK}/api/addToMap`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+        .post(
+          `${import.meta.env.VITE_SERVER_LINK}/api/addToMap`,
+          data
+          // {
+          //   headers: {
+          //     "Content-Type": "multipart/form-data",
+          //   },
+          // }
+        )
         .then((res) => {
           if (res.status === 200) {
             setInputData({
@@ -162,15 +166,14 @@ const FormDetails = () => {
             openModal();
           }
         });
+      setImagePreview(null);
+      setOnSelectFile("");
     } else {
       alert(
         "Check the address again. Try removing, search add from suggetions!"
       );
     }
   };
-  const [imagePreview, setImagePreview] = useState(null);
-  const [videoPreview, setVideoPreview] = useState(null);
-  const [onSelectFile, setOnSelectFile] = useState("");
 
   return (
     <section className="px-32 py-16">
@@ -366,10 +369,12 @@ const FormDetails = () => {
                 inputData={inputData}
                 imagePreview={imagePreview}
                 setImagePreview={setImagePreview}
-                videoPreview={videoPreview}
-                setVideoPreview={setVideoPreview}
+                // videoPreview={videoPreview}
+                // setVideoPreview={setVideoPreview}
                 onSelectFile={onSelectFile}
                 setOnSelectFile={setOnSelectFile}
+                setImgUrl={setImgUrl}
+                setLoading={setLoading}
               />
             </div>
 
@@ -402,6 +407,7 @@ const FormDetails = () => {
               <div className="flex justify-center">
                 <button
                   type="submit"
+                  disabled={loading}
                   className="bg-primary text-white font-bold py-2 px-9 rounded-lg"
                 >
                   Send
@@ -413,34 +419,34 @@ const FormDetails = () => {
       </div>
       {isOpen && (
         // Modal structure here
-        <div class="fixed z-10 inset-0 overflow-y-auto">
-          <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity">
-              <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
 
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
-              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div class="sm:flex sm:items-start">
-                  <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <i class="fas fa-check text-green-600"></i>
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <i className="fas fa-check text-green-600"></i>
                   </div>
-                  <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">
                       Sucessfully Submitted a request.
                     </h3>
-                    <div class="mt-2">
-                      <p class="text-sm text-gray-500">
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">
                         We will be verifying it.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-8 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-8 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={closeModal}
                 >
                   OK

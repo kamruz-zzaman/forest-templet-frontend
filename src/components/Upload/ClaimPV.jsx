@@ -1,39 +1,20 @@
-// const ClaimPV = () => {
-//   return (
-//     <div>
-//       <div>
-//         <label htmlFor="ReportImageTmp"></label>
-//         <input
-//           type="file"
-//           name="data[Report][image_tmp][]"
-//           className="form-control file"
-//           autoComplete="off"
-//           multiple="multiple"
-//           accept="image/jpeg,image/gif,image/png,video/avi,video/msvideo,video/x-msvideo,video/mpeg,video/x-mpeg,video/quicktime,video/mp4,video/x-flv,application/x-mpegURL,video/3gpp"
-//           data-show-upload="false"
-//           data-allowed-file-types="image,video"
-//           id="ReportImageTmp"
-//         />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ClaimPV;
-
+import axios from "axios";
 import { useState, useRef } from "react";
 export default function FilePreviewer({
   setInputData,
   inputData,
   imagePreview,
   setImagePreview,
-  videoPreview,
-  setVideoPreview,
+  // videoPreview,
+  // setVideoPreview,
   onSelectFile,
   setOnSelectFile,
+  setImgUrl,
+  setLoading,
 }) {
   const filePicekerRef = useRef(null);
   function previewFile(e) {
+    setLoading(true);
     // Reading New File (open file Picker Box)
     const reader = new FileReader();
     // Gettting Selected File (user can select multiple but we are choosing only one)
@@ -47,15 +28,45 @@ export default function FilePreviewer({
       if (selectedFile.type.includes("image")) {
         setInputData({ ...inputData, img: selectedFile });
         setImagePreview(readerEvent.target.result);
-      } else if (selectedFile.type.includes("video")) {
-        setVideoPreview(readerEvent.target.result);
-        setInputData({ ...inputData, video: selectedFile });
       }
     };
+    let formData = new FormData();
+
+    formData.append("image", selectedFile);
+    formData.append("key", `${import.meta.env.VITE_IMGBB_API_KEY}`);
+
+    axios
+      .post("https://api.imgbb.com/1/upload", formData)
+      .then((res) => {
+        setImgUrl(res.data.data.url);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        alert("Error uploading image. Upload Again");
+      });
+
+    // formData.append("image", selectedFile);
+
+    // fetch("https://api.imgur.com/3/image", {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: "Client-ID 8169f595a9b5794",
+    //   },
+    //   body: formData,
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setImgUrl(data.data.link);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setLoading(false);
+    //     alert("Error uploading image to Imgur. Upload Again");
+    //   });
   }
   function clearFiles() {
     setImagePreview(null);
-    setVideoPreview(null);
     setOnSelectFile("");
   }
   return (
@@ -63,12 +74,12 @@ export default function FilePreviewer({
       <div className="">
         <input
           ref={filePicekerRef}
-          accept="image/*, video/*"
+          accept="image/*,"
           onChange={previewFile}
           type="file"
           hidden
         />
-        {(imagePreview != null || videoPreview != null) && (
+        {imagePreview != null && (
           <div className="border p-2 flex justify-between">
             <div>
               {imagePreview != null && (
@@ -77,13 +88,6 @@ export default function FilePreviewer({
                   src={imagePreview}
                   alt=""
                 />
-              )}
-              {videoPreview != null && (
-                <video
-                  className="w-[300px] h-[250px]"
-                  controls
-                  src={videoPreview}
-                ></video>
               )}
             </div>
             <div className="cursor-pointer " onClick={clearFiles}>

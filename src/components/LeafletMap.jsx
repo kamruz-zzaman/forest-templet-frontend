@@ -45,30 +45,19 @@ const LeafletMap = () => {
         />
         {info?.length &&
           info?.map((dt, i) => {
-            console.log(dt);
             const pos = [dt?.address?.latitude, dt?.address?.longitude];
             return (
               <Marker position={pos} key={i} icon={customIcon}>
                 <Popup className="!z-[9999]">
-                  <div className=" max-w-sm bg-white border border-gray-200 rounded-lg shadow "></div>
                   {dt?.img && (
                     <img
-                      class="rounded-t-lg w-full"
-                      src={`${import.meta.env.VITE_SERVER_LINK}/${dt.img}`}
+                      className="rounded-t-lg w-full"
+                      src={`${dt.img}`}
                       alt=""
                     />
                   )}
-                  {dt?.video && (
-                    <video width="640" height="360" controls>
-                      <source
-                        src={`${import.meta.env.VITE_SERVER_LINK}/${dt?.video}`}
-                        type="video/mp4"
-                      />
-                    </video>
-                  )}
-
-                  <div class="px-5">
-                    <div class="mb-2 text-2xl font-semibold tracking-tight text-gray-800 ">
+                  <div className="px-5">
+                    <div className="mb-2 text-2xl font-semibold tracking-tight text-gray-800 ">
                       {/* <br /> */}
                       {dt?.reportType?.map((m, i) => {
                         return (
@@ -79,11 +68,11 @@ const LeafletMap = () => {
                       })}
                     </div>
 
-                    <p class="mb-2 font-normal text-gray-700">
+                    <p className="mb-2 font-normal text-gray-700">
                       Date : {dt?.date}
                     </p>
 
-                    <p class="mb-8 font-normal text-gray-700">
+                    <p className="mb-8 font-normal text-gray-700">
                       Status : {dt?.status}
                     </p>
                   </div>
