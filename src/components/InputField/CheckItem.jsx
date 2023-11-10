@@ -18,11 +18,13 @@ const CheckItem = ({ data, onChangeData, selectedData }) => {
                   alt=""
                 />
               </figure>
-              <div className="flex flex-col justify-center items-center mt-2">
-                <span className="">{label}</span>
+              <div className="flex flex-col justify-center items-center mt-2 ">
+                <span className="bg-primary text-white p-2 block w-full text-center">
+                  {label}
+                </span>
                 <select
                   name="data[Report][activity_abandoned_wood]"
-                  className="form-control select block mx-4 mt-2 text-center"
+                  className="form-control select block  mt-2 text-center bg-primary text-white p-2"
                   autoComplete="off"
                   data-live-search="1"
                   id="ReportActivityAbandonedWood"
@@ -32,14 +34,31 @@ const CheckItem = ({ data, onChangeData, selectedData }) => {
                     setVal(e.target.value);
                   }}
                 >
-                  <option value="">CHOOSE AN OPTION</option>
-                  <option value="Parchet">Parquet</option>
-                  <option value="în pădure">in the forest</option>
-                  <option value="Pe marginea drumurilor și potecilor">
+                  <option className="bg-white text-black" value="">
+                    CHOOSE AN OPTION
+                  </option>
+                  <option className="bg-white text-black" value="Parchet">
+                    Parquet
+                  </option>
+                  <option className="bg-white text-black" value="în pădure">
+                    in the forest
+                  </option>
+                  <option
+                    className="bg-white text-black"
+                    value="Pe marginea drumurilor și potecilor"
+                  >
                     On the sides of roads and paths
                   </option>
-                  <option value="În albia râului">In the riverbed</option>
-                  <option value="La platforma primară">
+                  <option
+                    className="bg-white text-black"
+                    value="În albia râului"
+                  >
+                    In the riverbed
+                  </option>
+                  <option
+                    className="bg-white text-black"
+                    value="La platforma primară"
+                  >
                     At the primary platform
                   </option>
                 </select>
@@ -67,7 +86,7 @@ const CheckItem = ({ data, onChangeData, selectedData }) => {
                 alt=""
               />
             </figure>
-            <p className="ms-2 ">{label}</p>
+            <p className="ms-2 bg-primary text-white p-2">{label}</p>
           </div>
         </label>
         <input className="hidden" id={htmlId} type="checkbox" />

@@ -10,6 +10,8 @@ import Login from "./pages/Login.jsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
+import Impressum from "./components/Impressum/Impressum.jsx";
+import Privacy from "./components/Data/Privacy.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -27,6 +29,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/Impressum" element={<Impressum />} />
+          <Route path="/data-privacy" element={<Privacy />} />
         </Routes>
       </BrowserRouter>
     </Provider>

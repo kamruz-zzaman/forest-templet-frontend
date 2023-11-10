@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import CheckboxItems from "./InputField/CheckboxItems";
 import FilePreviewer from "./Upload/ClaimPV";
 import img from "../assets/l.png";
@@ -174,6 +175,21 @@ const FormDetails = () => {
       );
     }
   };
+  const location = useLocation();
+
+  useEffect(() => {
+    // Parse URL parameters
+    const params = new URLSearchParams(location.search);
+    const scrollToElement = params.get("scrollTo");
+
+    // Scroll to the specified element
+    if (scrollToElement) {
+      const element = document.getElementById(scrollToElement);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location.search]);
 
   return (
     <section className="px-32 py-16">
@@ -182,13 +198,12 @@ const FormDetails = () => {
           {/* top description */}
           <div className="text-sm text-[#333] mb-2">
             <p className="mb-4">
-              In order to provide relevant information and clues to the Forest
-              Guard or the local Forest Ranger, it is important to document the
-              situation we encounter as well as possible.
-            </p>
-
-            <p>
-              {`Download the "Greenpeace Guide" for details on what information to write down or photograph. The notification will be forwarded to the responsible authorities in the area where the problem was observed.`}{" "}
+              To ensure the Forest Guard or local Forest Ranger receives
+              pertinent details, it is crucial to meticulously document any
+              encountered situations. Refer to the "Greenpeace Guide" for
+              specific instructions on the information to record or photograph.
+              The gathered information will be promptly relayed to the relevant
+              authorities in the observed problem area.
             </p>
           </div>
 
@@ -267,14 +282,14 @@ const FormDetails = () => {
                 />
               </div>
 
-              <div className="col-span-12 mb-8 mt-4">
+              {/* <div className="col-span-12 mb-8 mt-4">
                 <p>
                   {`The personal data will not be published on the site, but we need them to be able to register the notification, according to the regulations in force (Ordinance no. 27/30.01.2002)`}
                 </p>
-              </div>
+              </div> */}
 
               {/* Tell us where it happened */}
-              <div className="col-span-12">
+              <div className="col-span-12 mt-8">
                 {fromTitle("2. ", " Tell us where it happened")}
               </div>
 
@@ -335,7 +350,7 @@ const FormDetails = () => {
 
               {/* Illegal activity you noticed */}
 
-              <div className="col-span-12 my-4 mt-8">
+              <div className="col-span-12 my-4 mt-8" id="timber">
                 {fromTitle(
                   "3. ",
                   ` Tell us who you are`,
@@ -395,15 +410,7 @@ const FormDetails = () => {
               </label>
             </div>
 
-            <div className="col-span-12 my-2">
-              <p>
-                I want you to check the situation in the area and send me the
-                inspection report to the email address provided, as well as to
-                forestwatch000@gmail.com
-              </p>
-            </div>
-
-            <div className="col-span-12">
+            <div className="col-span-12 mt-6">
               <div className="flex justify-center">
                 <button
                   type="submit"

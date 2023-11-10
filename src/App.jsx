@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./App.css";
 import FormDetails from "./components/FormDetails";
 import Header from "./components/Header";
@@ -16,18 +17,34 @@ function App() {
       <FormDetails />
       <footer className="border border-gray-100 text-gray-800 py-6">
         <div className="container mx-auto text-center">
-          <p className="text-lg">
-            &copy; 2023 Forest Watch. All rights reserved.
-          </p>
-          <p className="mt-2">
-            Contact us at{" "}
-            <a
-              href="mailto:forestwatch000@gmail.com"
-              className="text-blue-300 hover:text-blue-400"
+          <div className="flex gap-12 justify-center items-center">
+            <p className="text-lg">
+              &copy; 2023 Forest Watch. All rights reserved.
+            </p>
+            <Link
+              to={"/impressum"}
+              className="bg-primary px-6 w-36 py-2 rounded-md text-white"
             >
-              forestwatch000@gmail.com
-            </a>
-          </p>
+              Impressum
+            </Link>
+          </div>
+          <div className="flex gap-12 justify-center items-center mt-3">
+            <p className="">
+              Contact us at{" "}
+              <a
+                href="mailto:forestwatch000@gmail.com"
+                className="text-blue-300 hover:text-blue-400"
+              >
+                forestwatch000@gmail.com
+              </a>
+            </p>
+            <Link
+              to={"/data-privacy"}
+              className="bg-primary px-6 ms-8 w-36 py-2 rounded-md text-white"
+            >
+              Data Privacy
+            </Link>
+          </div>
         </div>
       </footer>
     </div>

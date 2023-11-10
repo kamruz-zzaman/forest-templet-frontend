@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div className=" flex justify-center items-center mb-3 mt-4">
       <div className="mr-20">
-        <img width={179} height={167} src={Logo} alt="" />
+        <img width={145} height={127} src={Logo} alt="" />
       </div>
       <div className="text-center text-primary">
         <h1 className="text-[40px]">Forest Watch</h1>
@@ -19,11 +19,11 @@ const Header = () => {
             to="/identify-illegal-timber"
             className="pr-5 mr-5 font-bold border-r border-primary cursor-pointer"
           >
-            how to identify illegal timber
+            Unearth the Secrets
           </Link>
-          <Link to="/admin" className="font-bold cursor-pointer">
+          {/* <Link to="/admin" className="font-bold cursor-pointer">
             Admin Panel
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

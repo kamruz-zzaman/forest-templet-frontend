@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setdata } from "../features/forest/forestSlice";
 import L from "leaflet";
 import img from "../assets/l.png";
+import { useLocation } from "react-router-dom";
 
 const LeafletMap = () => {
   const position = [47.37694720449335, 8.545659220192682];
   const [info, setInfo] = useState([]);
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.forest);
+  const location = useLocation();
+
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
@@ -21,7 +24,17 @@ const LeafletMap = () => {
       dispatch(setdata(locationData?.data.filter((inf, i) => inf.approve)));
     };
     getData();
-  }, []);
+  }, [location.search]);
+
+  useEffect(() => {
+    // Parse URL parameters
+    const params = new URLSearchParams(location.search);
+    const scrollToElement = params.get("scrollTo");
+    // Scroll to the specified element
+    if (scrollToElement) {
+      setInfo(data.filter((inf, i) => inf.status === scrollToElement));
+    }
+  }, [location.search, data]);
 
   const customIcon = new L.Icon({
     iconUrl: "./tree.png",
