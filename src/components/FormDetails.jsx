@@ -353,7 +353,7 @@ const FormDetails = () => {
               <div className="col-span-12 my-4 mt-8" id="timber">
                 {fromTitle(
                   "3. ",
-                  ` Tell us who you are`,
+                  ` Tell us what happend `,
                   "select at least one"
                 )}
               </div>
