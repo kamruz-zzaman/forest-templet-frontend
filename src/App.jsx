@@ -8,12 +8,20 @@ function App() {
   return (
     <div className=" relative">
       <Header />
+      <div className="text-center max-w-7xl  mx-auto">
+        We aim to halt illegal deforesting globally, starting by raising
+        awareness. We believe that drawing attention to illegal deforesting can
+        contribute to reducing such activities, especially when anyone with a
+        mobile phone can report it. On our website, visitors can report
+        instances of suspected illegal deforesting through an interactive map.
+      </div>
       <div
         className="max-w-7xl mx-auto mt-12
      "
       >
         <LeafletMap />
       </div>
+
       <FormDetails />
       <footer className="border border-gray-100 text-gray-800 py-6">
         <div className="container mx-auto text-center">

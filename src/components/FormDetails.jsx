@@ -194,6 +194,7 @@ const FormDetails = () => {
   return (
     <section className="px-32 py-16">
       <div className="container mx-auto">
+        <div className="font-semibold mt-2 mb-6 ">Creat an Alert</div>
         <div>
           {/* top description */}
           <div className="text-sm text-[#333] mb-2">
