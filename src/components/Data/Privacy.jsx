@@ -15,7 +15,7 @@ export default function Privacy() {
         <div className="mt-12">
           <p className="font-semibold">Data protection officer</p>
           <p>ForestWatch</p>
-          <p>0610000000</p>
+          {/* <p>0610000000</p> */}
           <p>Email: forestwatch000@gmail.com</p>
         </div>
         <div className="mt-12">

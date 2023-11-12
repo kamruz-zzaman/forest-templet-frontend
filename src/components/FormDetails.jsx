@@ -200,10 +200,17 @@ const FormDetails = () => {
             <p className="mb-4">
               To ensure the Forest Guard or local Forest Ranger receives
               pertinent details, it is crucial to meticulously document any
-              encountered situations. Refer to the "Greenpeace Guide" for
-              specific instructions on the information to record or photograph.
-              The gathered information will be promptly relayed to the relevant
-              authorities in the observed problem area.
+              encountered situations. Refer to the{" "}
+              <a
+                href=" https://www.greenpeace.org/usa/forests/solutions-to-deforestation"
+                target="_blank"
+                className=""
+              >
+                "Greenpeace Guide "
+              </a>
+              for specific instructions on the information to record or
+              photograph. The gathered information will be promptly relayed to
+              the relevant authorities in the observed problem area.
             </p>
           </div>
 
